@@ -6,11 +6,11 @@ const useVote = () => {
 
   const handleVote = async (id) => {
     try {
-      const votingTx = await contract.voteOnProposal(id); // Use your contract's voting function
-      const receipt = await votingTx.wait(); // Wait for the transaction to be mined
+      const votingTx = await contract.voteOnProposal(id); 
+      const receipt = await votingTx.wait(); 
 
       if (receipt.status === 1) {
-        // Check if transaction was successful
+        
         toast.success("Voted successfully!");
       } else {
         toast.error("Transaction failed.");
