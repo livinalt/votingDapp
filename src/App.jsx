@@ -4,6 +4,10 @@ import CreateProposalModal from "./components/CreateProposalModal";
 import Proposals from "./components/Proposals";
 import useContract from "./hooks/useContract";
 import { useCallback, useEffect, useState } from "react";
+import { Contract } from "ethers";
+import useRunners from "./hooks/useRunners";
+import { Interface } from "ethers";
+import ABI from "./ABI/proposal.json";
 
 const multicallAbi = [
   "function tryAggregate(bool requireSuccess, (address target, bytes callData)[] calls) returns ((bool success, bytes returnData)[] returnData)",
