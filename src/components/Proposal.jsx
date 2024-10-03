@@ -3,7 +3,6 @@ import { formatEther } from "ethers";
 import useVote from "../hooks/useVote";
 
 const Proposal = ({
-    id,
     description,
     amount,
     minRequiredVote,
@@ -12,8 +11,9 @@ const Proposal = ({
     executed,
 }) => {
      const handleVote = useVote();
+     
       const onVoteClick = () => {
-        handleVote(id);
+        handleVote();
       };
     return (
         <Box className="bg-slate-400 rounded-md shadow-sm p-4 w-96">
