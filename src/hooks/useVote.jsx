@@ -35,7 +35,7 @@ const useVote = () => {
         if (receipt.status === 1) {
           toast.success("Voted successfully!");
         } else {
-          toast.error("Transaction failed.");
+          toast.error("Voting failed.");
         }
       } catch (error) {
         toast.error("Error during voting: " + error.message);
