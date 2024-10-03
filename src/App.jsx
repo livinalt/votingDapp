@@ -33,6 +33,7 @@ function App() {
         const proposalCount = Number(
           await readOnlyProposalContract.proposalCount()
         );
+        console.log("Proposal count: ",proposalCount);
 
         const proposalsIds = Array.from(
           { length: proposalCount - 1 },
@@ -126,7 +127,7 @@ function App() {
             <Box className="flex justify-end p-4">
                 <CreateProposalModal />
             </Box>
-            <Proposals />
+            <Proposals proposals={proposals}  />
         </Layout>
     );
 }
