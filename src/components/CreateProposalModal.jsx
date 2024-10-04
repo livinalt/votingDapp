@@ -122,7 +122,7 @@ const CreateProposalModal = () => {
             <button
               type="button"
               className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-all duration-300"
-              onClick={handleCreateClick} // Call the validate and create function
+              onClick={handleCreateClick} 
             >
               Create
             </button>

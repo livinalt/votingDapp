@@ -54,7 +54,8 @@ function App() {
           itf.decodeFunctionResult("proposals", res.returnData)
         );
 
-        const data = decodedResults.map((proposalStruct) => ({
+        const data = decodedResults.map((proposalStruct, index) => ({
+          proposalId: index + 1,
           description: proposalStruct.description,
           amount: proposalStruct.amount,
           minRequiredVote: proposalStruct.minVotesToPass,

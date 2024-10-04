@@ -3,6 +3,7 @@ import { formatEther } from "ethers";
 import useVote from "../hooks/useVote";
 
 const Proposal = ({
+  proposalId,
   description,
   amount,
   minRequiredVote,
@@ -10,7 +11,7 @@ const Proposal = ({
   deadline,
   executed,
 }) => {
-  const handleVote = useVote();
+  const {handleVote} = useVote(proposalId);
 
   const onVoteClick = () => {
     handleVote();
