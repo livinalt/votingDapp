@@ -16,6 +16,8 @@ const Proposal = ({
     handleVote();
   };
 
+  const isPastDeadline = Date.now() / 1000 > Number(deadline);
+
   return (
     <Box className="bg-white border border-gray-200 rounded-lg p-6 w-80 shadow-md">
       <Text className="text-xl font-semibold mb-4 text-gray-800">
@@ -49,11 +51,13 @@ const Proposal = ({
           <Text className="text-gray-800">{String(executed)}</Text>
         </Flex>
       </Box>
+
       <Button
         className="bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium w-full mt-6 py-2 rounded-md"
         onClick={onVoteClick}
+        disabled={executed || isPastDeadline}
       >
-        Vote
+        {executed ? "Executed" : isPastDeadline ? "Expired" : "Vote"}
       </Button>
     </Box>
   );

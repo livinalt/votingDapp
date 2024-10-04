@@ -7,13 +7,12 @@ import { liskSepoliaNetwork } from "../connection";
 
 const useVote = () => {
   const contract = useContract(true);
-  const { address } = useAppKitAccount(); 
-  const { chainId } = useAppKitNetwork(); 
-  
+  const { address } = useAppKitAccount();
+  const { chainId } = useAppKitNetwork();
 
   const handleVote = useCallback(
-    async () => {
-
+    async (proposal) => {
+     
       if (!address) {
         toast.error("Connect your wallet!");
         return;
@@ -23,14 +22,14 @@ const useVote = () => {
         return;
       }
 
-       if (Number(chainId) !== liskSepoliaNetwork.chainId) {
-         toast.error("You are not connected to the right network");
-         return;
-       }
+      if (Number(chainId) !== liskSepoliaNetwork.chainId) {
+        toast.error("You are not connected to the right network");
+        return;
+      }
 
       try {
-        const votingTx = await contract.voteOnProposal(); 
-        const receipt = await votingTx.wait(); 
+        const votingTx = await contract.voteOnProposal(proposal.index); 
+        const receipt = await votingTx.wait();
 
         if (receipt.status === 1) {
           toast.success("Voted successfully!");

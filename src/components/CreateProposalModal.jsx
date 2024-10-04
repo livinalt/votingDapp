@@ -12,12 +12,37 @@ const CreateProposalModal = () => {
     duration: "",
     minVote: 2,
   });
+  
+  const [error, setError] = useState(""); // State for error messages
 
   const handleInputChange = (name, e) => {
     setState((preState) => ({ ...preState, [name]: e.target.value }));
   };
 
   const { amount, duration, description, minVote, recipient } = state;
+
+  const validateInputs = () => {
+    if (!description || !recipient || !amount || !duration) {
+      setError("Please fill in all fields.");
+      return false;
+    }
+    if (isNaN(amount) || Number(amount) <= 0) {
+      setError("Amount must be a positive number.");
+      return false;
+    }
+    if (isNaN(minVote) || Number(minVote) <= 0) {
+      setError("Minimum votes must be a positive integer.");
+      return false;
+    }
+    setError(""); // Reset error if inputs are valid
+    return true;
+  };
+
+  const handleCreateClick = () => {
+    if (validateInputs()) {
+      handleCreateProposal(description, recipient, amount, duration, minVote);
+    }
+  };
 
   return (
     <Dialog.Root>
@@ -33,6 +58,7 @@ const CreateProposalModal = () => {
             Create Proposal
           </Dialog.Title>
           <form className="space-y-4">
+            {error && <div className="text-red-500">{error}</div>} {/* Display error message */}
             <div className="flex flex-col">
               <label className="text-gray-600 mb-1" htmlFor="description">
                 Description
@@ -96,15 +122,7 @@ const CreateProposalModal = () => {
             <button
               type="button"
               className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-all duration-300"
-              onClick={() =>
-                handleCreateProposal(
-                  description,
-                  recipient,
-                  amount,
-                  duration,
-                  minVote
-                )
-              }
+              onClick={handleCreateClick} // Call the validate and create function
             >
               Create
             </button>
