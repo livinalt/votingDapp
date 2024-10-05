@@ -24,6 +24,7 @@ const useVote = (proposalId) => {
       toast.error("You are not connected to the right network");
       return;
     }
+    
 
     try {
       const votingTx = await contract.vote(proposalId);
@@ -34,6 +35,7 @@ const useVote = (proposalId) => {
       } else {
         toast.error("Voting failed.");
       }
+  
     } catch (error) {
       toast.error("Error during voting: " + error.message);
     }
